@@ -1,0 +1,5 @@
+name: OreGen
+main: nolimittru\oregen\Main
+version: 0.1.0
+api: [3.0.0]
+author: nolimitTru
