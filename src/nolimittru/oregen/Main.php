@@ -28,7 +28,6 @@ class Main extends PluginBase
     public function oreManager(): OreManager
     {
         return $this->oreManager;
-
     }
 
 }
