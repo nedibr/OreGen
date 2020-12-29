@@ -23,7 +23,6 @@ class GenListener implements Listener
         $block = $event->getBlock();
         if ($this->plugin->oreManager()->checkOreLevel($block->getLevel()->getName())) {
             if (in_array($block->getItemId(), $blocks)) {
-                $event->setCancelled();
                 $this->plugin->oreManager()->addOre($block->asPosition());
             }
         }
