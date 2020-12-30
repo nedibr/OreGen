@@ -1,3 +1,3 @@
 # OreGen
 
-A simple minecraft plugin which generates when an ore is broken.
+A simple minecraft plugin which generates a random ore when an ore is broken.
