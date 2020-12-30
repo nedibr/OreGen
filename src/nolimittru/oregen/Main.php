@@ -16,7 +16,6 @@ class Main extends PluginBase
     {
         $this->saveResource("config.json");
         $this->registerClasses();
-        $this->getScheduler()->scheduleRepeatingTask(new GenTask($this), 160);
     }
 
     public function registerClasses(): void{

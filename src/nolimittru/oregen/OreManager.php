@@ -9,7 +9,6 @@ use pocketmine\math\Vector3;
 
 use function in_array;
 use function explode;
-use function array_shift;
 
 class OreManager
 {
@@ -24,8 +23,6 @@ class OreManager
     private Main $plugin;
     /** @var array */
     private array $arenas;
-    /** @var array */
-    private array $brokenOres = [];
 
     public function __construct(Main $plugin, array $arenas)
     {
@@ -39,23 +36,28 @@ class OreManager
         }
     }
 
-    public function replaceBlock(): void
+    public function replaceBlock(string $block): void
     {
-        $block = explode(":", $this->brokenOres[0]);
+        $block = explode(":", $block);
         $this->plugin->getServer()
             ->getLevel($block[3])
             ->setBlock(new Vector3($block[0], $block[1], $block[2]),
-                Block::get(self::ORES[array_rand(self::ORES)], 0));
-        array_shift($this->brokenOres);
+                Block::get(self::ORES[array_rand(self::ORES)], 0)
+        );
     }
 
     public function addOre(Position $pos): void
     {
         $format = "{$pos->getX()}:{$pos->getY()}:{$pos->getZ()}:{$pos->getLevel()->getId()}";
-        $this->brokenOres[] = $format;
+
+        $this->plugin->getScheduler()->scheduleDelayedTask(
+            new GenTask($this->plugin, $format), 160
+        );
+
         $this->plugin->getServer()->getLevel($pos->getLevel()
             ->getId())
-            ->setBlock($pos, Block::get(BlockIds::BEDROCK));
+            ->setBlock($pos, Block::get(BlockIds::BEDROCK)
+        );
     }
 
     public function checkOreLevel(string $levelName): bool
@@ -66,11 +68,6 @@ class OreManager
     public function getLoadedArenas(): array
     {
         return $this->arenas;
-    }
-
-    public function getBrokenOres(): array
-    {
-        return $this->brokenOres;
     }
 
 }
