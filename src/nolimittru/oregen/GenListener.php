@@ -22,7 +22,7 @@ class GenListener implements Listener
         $blocks = OreManager::ORES;
         $block = $event->getBlock();
         if ($this->plugin->oreManager()->checkOreLevel($block->getLevel()->getName())) {
-            if (in_array($block->getItemId(), $blocks)) {
+            if (in_array($block->getItemId(), $blocks, true)) {
                 $this->plugin->oreManager()->addOre($block->asPosition());
             }
         }
