@@ -60,7 +60,7 @@ class OreManager
 
     public function checkOreLevel(string $levelName): bool
     {
-        return in_array($levelName, $this->arenas);
+        return in_array($levelName, $this->arenas, true);
     }
 
     public function getLoadedArenas(): array
