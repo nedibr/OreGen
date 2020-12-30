@@ -14,10 +14,12 @@ class GenTask extends Task
     public function __construct(Main $plugin, string $block)
     {
         $this->plugin = $plugin;
+        $this->block = $block;
     }
 
     public function onRun(int $currentTick): void
     {
         $this->plugin->oreManager()->replaceBlock($this->block);
+
     }
 }
